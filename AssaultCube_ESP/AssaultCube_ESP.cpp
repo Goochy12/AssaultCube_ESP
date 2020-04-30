@@ -9,15 +9,18 @@ int main()
 {
     cout << "Waiting to open Assult Cube...\n"; // Welcome message
 
-    //get process
-    //open process
+    //get process window
+    hwndAC_Client = NULL;
 
     // wait for the user to open the game
-    while (true) {
-
+    while (hwndAC_Client == NULL) {
+        //open process
+        hwndAC_Client = FindWindow(0, L"AssaultCube");
     }
 
     cout << "Assult Cube opened!" << endl;  // confirm the game is open
+
+
 
     return 0;
 }
