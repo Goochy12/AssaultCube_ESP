@@ -2,10 +2,24 @@
 //
 
 #include <iostream>
+#include "AssaultCube_ESP.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Waiting to open Assult Cube...\n"; // Welcome message
+
+    //get process
+    //open process
+
+    // wait for the user to open the game
+    while (true) {
+
+    }
+
+    cout << "Assult Cube opened!" << endl;  // confirm the game is open
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
