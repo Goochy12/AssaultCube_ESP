@@ -18,16 +18,28 @@ int main()
         hwndAC_Client = FindWindow(0, L"AssaultCube");
     }
 
-    cout << "Assult Cube opened!" << endl;  // confirm the game is open
+    /*
+    get the process ID by the name of the window
+    */
+
+    //getProcessIdByWindowName(hwndAC_Client);
 
     //get the process ID of the client
     GetWindowThreadProcessId(hwndAC_Client, &processIdAC_Client);
+
+    cout << "Assult Cube opened! Process ID: " << processIdAC_Client << endl;  // confirm the game is open
 
     //open game process
     hProcessAC_Client = OpenProcess(PROCESS_VM_READ, FALSE, processIdAC_Client);
 
     return 0;
 }
+
+DWORD getProcessIDByName(const wchar_t* processName) {
+
+}
+
+void setHealth()
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
