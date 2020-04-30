@@ -5,3 +5,5 @@ HWND hwndAC_Client;
 HANDLE hProcessAC_Client;
 DWORD localPlayerPtr;
 DWORD healthOffset = 0xF8;
+
+void setHealth(int h);
