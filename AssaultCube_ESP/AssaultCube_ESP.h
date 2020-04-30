@@ -7,5 +7,5 @@ DWORD processIdAC_Client;	//process ID of the client
 DWORD localPlayerPtr;	//pointer to localplayer entity
 DWORD healthOffset = 0xF8;	//health offset
 
-void setHealth(int h);
+void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address);
 DWORD getProcessIDByName(const wchar_t* processName);

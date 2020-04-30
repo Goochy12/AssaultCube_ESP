@@ -7,11 +7,27 @@
 #include <vector>
 #include <Windows.h>
 
+DWORD processID;
+
 int main()
 {
 
-    //get process id
-    DWORD processID = GetProcessID(L"ac_client.exe");   //L - converts to unicode
+    processID = NULL;   //initiate to null
+
+    //welcome message
+    std::cout << "Waiting for Assult Cube to be opened..." << std::endl;
+
+    while (processID == NULL)
+    {
+        //get process id
+        processID = GetProcessID(L"ac_client.exe");   //L - converts to unicode
+    }
+
+    system("cls");  //clear the screen
+    Sleep(500);
+
+    //load the menu
+    std::cout << "Welcome to Liam's Assult Cube Trainer/ESP" << std::endl;
 
     //get module base address
     uintptr_t moduleBase = GetModuleBaseAddress(processID, L"ac_client.exe");
@@ -22,28 +38,10 @@ int main()
 
     //resolve the base address
     uintptr_t dynamicPtrBaseAddr = moduleBase + 0x10f4f4;
-
     std::cout << "DyanmicPtrBaseAddr: " << "0x" << std::hex << dynamicPtrBaseAddr << std::endl;
 
-    //resolve ammo pointer
-    std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };
-    uintptr_t ammoAddress = FindDMAAddy(hProcess, dynamicPtrBaseAddr, ammoOffsets);
-
-    std::cout << "AmmoAddr: " << "0x" << std::hex << ammoAddress << std::endl;
-
-    //read ammo value
-    int ammoValue = 0;
-    ReadProcessMemory(hProcess, (BYTE*)ammoAddress, &ammoValue, sizeof(ammoValue), nullptr);
-    std::cout << "Current Ammo: " << std::dec << ammoValue << std::endl;
-
-    //write ammo value
-    int newAmmo = 1337;
-    WriteProcessMemory(hProcess, (BYTE*)ammoAddress, &newAmmo, sizeof(newAmmo), nullptr);
-
-    //read again
-    ReadProcessMemory(hProcess, (BYTE*)ammoAddress, &ammoValue, sizeof(ammoValue), nullptr);
-    std::cout << "Current Ammo: " << std::dec << ammoValue << std::endl;
-
+    // TODO: refactor 
+    std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //hardcode ammo offsets
 
     getchar(); // press enter for input before code ends
     return 0;
@@ -53,8 +51,26 @@ DWORD getProcessIDByName(const wchar_t* processName) {
     return  0;
 }
 
-void setHealth() {
+void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address) {
+    //read ammo value
+    int initialGameValue = 0;
+    ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+    std::cout << "Current Value: " << std::dec << initialGameValue << std::endl;
 
+    WriteProcessMemory(hProcess, (BYTE*)address, &value, sizeof(value), nullptr);
+
+    //read again
+    ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+    std::cout << "New Value: " << std::dec << initialGameValue << std::endl;
+}
+
+uintptr_t getAmmoAddress(std::vector<unsigned int> ammoOffsets, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr) {
+    uintptr_t ammoAddress;
+
+    //resolve ammo pointer
+    ammoAddress = FindDMAAddy(hProcess, dynamicPtrBaseAddr, ammoOffsets);
+
+    return ammoAddress;
 }
 
 //std::cout << "Waiting to open Assult Cube...\n"; // Welcome message
