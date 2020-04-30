@@ -14,12 +14,13 @@ int main()
 
     // wait for the user to open the game
     while (hwndAC_Client == NULL) {
-        //open process
+        //find game process
         hwndAC_Client = FindWindow(0, L"AssaultCube");
     }
 
     cout << "Assult Cube opened!" << endl;  // confirm the game is open
 
+    //open game process
 
 
     return 0;
