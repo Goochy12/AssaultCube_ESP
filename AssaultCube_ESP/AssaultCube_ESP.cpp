@@ -20,8 +20,11 @@ int main()
 
     cout << "Assult Cube opened!" << endl;  // confirm the game is open
 
-    //open game process
+    //get the process ID of the client
+    GetWindowThreadProcessId(hwndAC_Client, &processIdAC_Client);
 
+    //open game process
+    hProcessAC_Client = OpenProcess(PROCESS_VM_READ, FALSE, processIdAC_Client);
 
     return 0;
 }
