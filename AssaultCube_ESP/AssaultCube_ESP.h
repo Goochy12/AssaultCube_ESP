@@ -8,3 +8,4 @@ DWORD localPlayerPtr;	//pointer to localplayer entity
 DWORD healthOffset = 0xF8;	//health offset
 
 void setHealth(int h);
+DWORD getProcessIDByName(const wchar_t* processName);
