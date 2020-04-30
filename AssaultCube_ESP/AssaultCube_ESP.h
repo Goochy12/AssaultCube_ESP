@@ -3,6 +3,7 @@
 
 HWND hwndAC_Client;	//window handler for client
 HANDLE hProcessAC_Client;	//process handler
+DWORD processIdAC_Client;	//process ID of the client
 DWORD localPlayerPtr;	//pointer to localplayer entity
 DWORD healthOffset = 0xF8;	//health offset
 
