@@ -13,15 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="process">
+      <UniqueIdentifier>{4943bdc5-03dd-4917-b262-6049f859acea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssaultCube_ESP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="process.cpp">
+      <Filter>process</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssaultCube_ESP.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="process.h">
+      <Filter>process</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
