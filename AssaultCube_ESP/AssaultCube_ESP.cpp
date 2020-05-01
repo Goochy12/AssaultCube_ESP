@@ -41,10 +41,21 @@ int main()
 
     handleProcessOpen(processID);
 
-    Menu menu();
+    std::vector <int> menuItems;
+    Menu menuObj(menuItems);
+    
+    addMenuItems(menuObj);
 
     //getchar(); // press enter for input before code ends
     return 0;
+}
+
+void addMenuItems(Menu menu) {
+
+}
+
+void createMenuItems() {
+
 }
 
 void handleProcessOpen(DWORD processID) {

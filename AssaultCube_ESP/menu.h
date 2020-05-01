@@ -8,11 +8,7 @@ private:
 	std::vector<int> *menuItems;
 
 public:
-	Menu(std::vector<int> menuItems) {
-		system("cls");
-
-		menuItems = *this->menuItems;
-
-	}
+	Menu(std::vector<int> menuItems);
+	~Menu();
 };
 
