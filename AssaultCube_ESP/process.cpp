@@ -29,26 +29,29 @@ DWORD GetProcessID(const wchar_t* processName) {
 
 //uintptr - architecture independent variable - addressable memory range (compile at same architecture as game process)
 uintptr_t GetModuleBaseAddress(DWORD processID, const wchar_t* moduleName) {
-	uintptr_t modBaseAddr = 0;
-	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processID);
+	uintptr_t modBaseAddr = 0;	//error checking
+	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processID); //get snapchot of processes
 
 	if (hSnap != INVALID_HANDLE_VALUE) {
-		MODULEENTRY32 modEntry;
-		modEntry.dwSize = sizeof(modEntry);
+		MODULEENTRY32 modEntry;	//module entry
+		modEntry.dwSize = sizeof(modEntry);	//set size correctly
 
+		//grabs first module in snapshot and store in module entry
 		if (Module32First(hSnap, &modEntry))
 		{
+			//loop through all modules (next command)
 			do
 			{
 				if (!_wcsicmp(modEntry.szModule, moduleName)) {
-					modBaseAddr = (uintptr_t)modEntry.modBaseAddr;
+					//compare file name against given module name (case insensitive)
+					modBaseAddr = (uintptr_t)modEntry.modBaseAddr;	//get module base address
 					break;
 				}
 			} while (Module32Next(hSnap, &modEntry));
 		}
 	}
-	CloseHandle(hSnap);
-	return modBaseAddr;
+	CloseHandle(hSnap);	//close snapshot
+	return modBaseAddr; //return module base address
 }
 
 //dynamic memory allocation
