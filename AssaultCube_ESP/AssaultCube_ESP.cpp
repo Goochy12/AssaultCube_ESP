@@ -7,7 +7,16 @@
 #include <vector>
 #include <Windows.h>
 
+
 DWORD processID;
+uintptr_t moduleBase;
+uintptr_t dynamicPtrBaseAddr;
+HANDLE hProcess;
+
+
+uintptr_t playerEntityPtrOffset = 0x10f4f4;
+DWORD healthOffset = 0xF8;	//health offset
+std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //ammo offsets
 
 int main()
 {
@@ -24,31 +33,44 @@ int main()
     }
 
     system("cls");  //clear the screen
-    Sleep(500);
+    Sleep(500); // give the process time to open
 
     //load the menu
     std::cout << "Welcome to Liam's Assult Cube Trainer/ESP" << std::endl;
 
-    //get module base address
-    uintptr_t moduleBase = GetModuleBaseAddress(processID, L"ac_client.exe");
 
-    //get handler to process
-    HANDLE hProcess = 0;
-    hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, processID);
+    handleProcessOpen(processID);
 
-    //resolve the base address
-    uintptr_t dynamicPtrBaseAddr = moduleBase + 0x10f4f4;
-    std::cout << "DyanmicPtrBaseAddr: " << "0x" << std::hex << dynamicPtrBaseAddr << std::endl;
+    openMenu();
 
-    // TODO: refactor 
-    std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //hardcode ammo offsets
-
-    getchar(); // press enter for input before code ends
+    //getchar(); // press enter for input before code ends
     return 0;
 }
 
-DWORD getProcessIDByName(const wchar_t* processName) {
-    return  0;
+void openMenu() {
+    system("cls");
+
+}
+
+void handleProcessOpen(DWORD processID) {
+    /*
+        OPEN PROCESS
+
+        Get the module base address
+        Use the module base address to get the dynamic pointer address
+        Open the process
+    */
+
+    //get module base address
+    moduleBase = GetModuleBaseAddress(processID, L"ac_client.exe");
+
+    //resolve the base address
+    dynamicPtrBaseAddr = moduleBase + playerEntityPtrOffset;
+    //std::cout << "DyanmicPtrBaseAddr: " << "0x" << std::hex << dynamicPtrBaseAddr << std::endl;
+
+    //get handler to process
+    hProcess = 0;
+    hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, processID);
 }
 
 void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address) {
@@ -100,6 +122,10 @@ uintptr_t getAmmoAddress(std::vector<unsigned int> ammoOffsets, HANDLE hProcess,
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
+
+//DWORD getProcessIDByName(const wchar_t* processName) {
+//    return  0;
+//}
 
 // Tips for Getting Started: 
 //   1. Use the Solution Explorer window to add/manage files
