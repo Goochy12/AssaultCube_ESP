@@ -6,6 +6,7 @@
 #include "process.h"
 #include <vector>
 #include <Windows.h>
+#include "menu.h"
 
 
 DWORD processID;
@@ -13,6 +14,7 @@ uintptr_t moduleBase;
 uintptr_t dynamicPtrBaseAddr;
 HANDLE hProcess;
 
+Menu *menu;
 
 uintptr_t playerEntityPtrOffset = 0x10f4f4;
 DWORD healthOffset = 0xF8;	//health offset
@@ -49,7 +51,7 @@ int main()
 
 void openMenu() {
     system("cls");
-
+    menu = new Menu();
 }
 
 void handleProcessOpen(DWORD processID) {

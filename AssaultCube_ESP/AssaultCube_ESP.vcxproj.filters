@@ -16,6 +16,9 @@
     <Filter Include="process">
       <UniqueIdentifier>{4943bdc5-03dd-4917-b262-6049f859acea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="menu">
+      <UniqueIdentifier>{5d94cff5-f952-4671-b15e-44a08fee6c84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssaultCube_ESP.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="process.cpp">
       <Filter>process</Filter>
     </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssaultCube_ESP.h">
@@ -31,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="process.h">
       <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -149,10 +149,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssaultCube_ESP.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="process.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssaultCube_ESP.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="process.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,5 +8,6 @@ DWORD localPlayerPtr;	//pointer to localplayer entity
 
 void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address);
 void handleProcessOpen(DWORD processID);
+void openMenu();
 
 //DWORD getProcessIDByName(const wchar_t* processName);
