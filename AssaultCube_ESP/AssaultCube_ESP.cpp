@@ -14,8 +14,6 @@ uintptr_t moduleBase;
 uintptr_t dynamicPtrBaseAddr;
 HANDLE hProcess;
 
-Menu *menu;
-
 uintptr_t playerEntityPtrOffset = 0x10f4f4;
 DWORD healthOffset = 0xF8;	//health offset
 std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //ammo offsets
@@ -43,15 +41,10 @@ int main()
 
     handleProcessOpen(processID);
 
-    openMenu();
+    Menu menu();
 
     //getchar(); // press enter for input before code ends
     return 0;
-}
-
-void openMenu() {
-    system("cls");
-    menu = new Menu();
 }
 
 void handleProcessOpen(DWORD processID) {
