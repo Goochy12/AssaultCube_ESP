@@ -46,9 +46,6 @@ void Menu::display() {
 	//calculate window width %
 	//calculate number of "=" minus the title
 
-	char keyPressed = '1';
-
-	while (keyPressed != '0') {
 		system("cls");
 
 		std::cout << "========== " << title << " ==========" << std::endl;
@@ -63,18 +60,18 @@ void Menu::display() {
 			std::cout << std::endl;
 		}
 
-		std::cin >> keyPressed;
-		for (int i = 0; i < menuItems.size(); i++) {
-			if (keyPressed == menuItems.at(i).getItemKeypress()) {
-				//execute some function
-				menuItems.at(i).setOptionToggle(!menuItems.at(i).getOptionToggle());
-				if (menuItems.at(i).getOptionToggle()) {
-					menuItems.at(i).setItemStatus("ON");
-				}
-				else {
-					menuItems.at(i).setItemStatus("OFF");
-				}
-			}
-		}
-	}
+		//std::cin >> keyPressed;
+		//for (int i = 0; i < menuItems.size(); i++) {
+		//	if (keyPressed == menuItems.at(i).getItemKeypress()) {
+		//		//execute some function
+		//		menuItems.at(i).setOptionToggle(!menuItems.at(i).getOptionToggle());
+		//		if (menuItems.at(i).getOptionToggle()) {
+		//			menuItems.at(i).setItemStatus("ON");
+		//		}
+		//		else {
+		//			menuItems.at(i).setItemStatus("OFF");
+		//		}
+		//	}
+		//}
+	
 }
