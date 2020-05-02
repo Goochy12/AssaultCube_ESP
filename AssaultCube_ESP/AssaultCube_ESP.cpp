@@ -62,7 +62,7 @@ int main()
 
 	//start the menu
 	startMenu();
-	
+
 	//start input loop
 	menuInputLoop();
 
@@ -79,19 +79,19 @@ void findAddresses() {
 }
 
 void menuInputLoop() {
-	
+
 	char keyPress;
 	std::cin >> keyPress;
 
-	std::async(continuousWriteToMemory);
+	//std::async(std::launch::async, continuousWriteToMemory);
+	auto f = std::async(std::launch::async, continuousWriteToMemory);
 
 	while (keyPress != '0') {
-
 
 		switch (keyPress)
 		{
 		case '1':
-			
+
 			//setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
 
 			ammoToggle = !ammoToggle;
@@ -101,9 +101,9 @@ void menuInputLoop() {
 			else {
 				ammoStatus = "OFF";
 			}
-
 			//update menu
-			
+
+			menu->display();
 
 			break;
 		default:
@@ -114,9 +114,14 @@ void menuInputLoop() {
 	}
 }
 
-void continuousWriteToMemory(){
-	if (ammoToggle) {
-		setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
+void continuousWriteToMemory() {
+	while (true)
+	{
+	//std::cout << "yes" << std::endl;
+		if (ammoToggle) {
+			setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
+		}
+
 	}
 }
 
@@ -159,14 +164,14 @@ void handleProcessOpen(DWORD processID) {
 void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address) {
 	//read ammo value
 	int initialGameValue = 0;
-	ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
-	std::cout << "Current Value: " << std::dec << initialGameValue << std::endl;
+	//ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+	//std::cout << "Current Value: " << std::dec << initialGameValue << std::endl;
 
 	WriteProcessMemory(hProcess, (BYTE*)address, &value, sizeof(value), nullptr);
 
 	//read again
-	ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
-	std::cout << "New Value: " << std::dec << initialGameValue << std::endl;
+	//ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+	//std::cout << "New Value: " << std::dec << initialGameValue << std::endl;
 }
 
 uintptr_t getAmmoAddress(std::vector<unsigned int> ammoOffsets, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr) {
