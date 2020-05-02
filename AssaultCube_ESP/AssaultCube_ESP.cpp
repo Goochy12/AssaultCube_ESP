@@ -7,6 +7,7 @@
 #include <vector>
 #include <Windows.h>
 #include "Menu/menu.h"
+#include <future>
 
 
 DWORD processID;
@@ -24,11 +25,13 @@ uintptr_t playerEntityPtrOffset = 0x10f4f4;
 DWORD healthOffset = 0xF8;	//health offset
 boolean healthToggle = FALSE;
 std::string healthStatus = "OFF";
+uintptr_t healthAddress;
 
 //ammo
 std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //ammo offsets
 boolean ammoToggle = FALSE;
 std::string ammoStatus = "OFF";
+uintptr_t ammoAddress;
 
 
 
@@ -55,9 +58,13 @@ int main()
 
 	handleProcessOpen(processID);
 
+	findAddresses();
+
 	//start the menu
 	startMenu();
-	menu->display();
+	
+	//start input loop
+	menuInputLoop();
 
 	//TODO:
 	//loop display - update on change
@@ -67,16 +74,65 @@ int main()
 	return 0;
 }
 
+void findAddresses() {
+	ammoAddress = FindDMAAddy(hProcess, dynamicPtrBaseAddr, ammoOffsets);
+}
+
+void menuInputLoop() {
+	
+	char keyPress;
+	std::cin >> keyPress;
+
+	std::async(continuousWriteToMemory);
+
+	while (keyPress != '0') {
+
+
+		switch (keyPress)
+		{
+		case '1':
+			
+			//setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
+
+			ammoToggle = !ammoToggle;
+			if (ammoToggle) {
+				ammoStatus = "ON";
+			}
+			else {
+				ammoStatus = "OFF";
+			}
+
+			//update menu
+			
+
+			break;
+		default:
+			break;
+		}
+
+		std::cin >> keyPress;
+	}
+}
+
+void continuousWriteToMemory(){
+	if (ammoToggle) {
+		setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
+	}
+}
+
 void createMenuItems() {
+	menu->addMenuItem(false, "OFF", '1', { "Unlimited Ammo" });
+	menu->addMenuItem(false, "OFF", '2', { "God Mode" });
+	menu->addMenuItem(false, "OFF", '3', { "ESP" });
+	menu->addMenuItem(false, "OFF", '4', { "Aimbot" });
 
 }
 
 void startMenu() {
 	menu = new Menu("AssaultCube Sample External Hack", "Welcome to my sample external hack!", "");
-	menu->addMenuItem(false, "OFF", '1', { "Add Ammo to Current Weapon" });
-	menu->addMenuItem(false, "OFF", '2', { "Add Health" });
-	menu->addMenuItem(false, "OFF", '3', { "ESP" });
-	menu->addMenuItem(false, "OFF", '4', { "Aimbot" });
+	createMenuItems();
+
+	menu->display();
 }
 
 void handleProcessOpen(DWORD processID) {

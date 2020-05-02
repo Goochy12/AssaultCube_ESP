@@ -15,4 +15,8 @@ std::vector<int> addMenuItems();
 
 void startMenu();
 
+void continuousWriteToMemory();
+void menuInputLoop();
+void findAddresses();
+
 //DWORD getProcessIDByName(const wchar_t* processName);
