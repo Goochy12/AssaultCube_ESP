@@ -7,31 +7,29 @@ typedef int T;
 class MenuItem
 {
 private:
-	std::string itemName;
-	bool optionToggle;
-	std::string itemStatus;
+
+	bool toggle;
+	std::string toggleDisplay;
 
 	char keypress;
-	std::string keypressDisplay;
+
+	std::vector<std::string> otherDisplayItems;
 
 public:
-	MenuItem(std::string itemName, std::string itemKeypressDispay, bool itemToggle, std::string itemStatus, char itemKeypress);
+	MenuItem(bool toggle, std::string toggleDisplay, char itemKeypress, std::vector<std::string> otherDisplayItems);
 	~MenuItem();
 
-	std::string getItemName();
-	void setItemName(std::string newItemName);
+	bool getItemToggle();
+	void setItemToggle(bool newToggle);
 
-	bool getOptionToggle();
-	void setOptionToggle(bool newToggle);
-	
-	std::string getItemStatus();
-	void setItemStatus(std::string newItemStatus);
-
+	std::string getItemToggleDisplay();
+	void setItemToggleDisplay(std::string newToggleDisplay);
 
 	char getItemKeypress();
 	void setItemKeypress(char newKeypress);
 
-	std::string getKeypressDisplay();
-	void setKeypressDisplay(std::string newKeypressDisplay);
+	std::vector<std::string> getOtherDisplayItems();
+	void setOtherDisplayItems(std::vector<std::string> otherDisplayItems);
+
 };
 

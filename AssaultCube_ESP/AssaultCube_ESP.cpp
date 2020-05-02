@@ -73,7 +73,10 @@ void createMenuItems() {
 
 void startMenu() {
 	menu = new Menu("AssaultCube Sample External Hack", "Welcome to my sample external hack!", "");
-	menu->addMenuItem("Test", "1", false, "OFF", '1');
+	menu->addMenuItem(false, "OFF", '1', { "Add Ammo to Current Weapon" });
+	menu->addMenuItem(false, "OFF", '2', { "Add Health" });
+	menu->addMenuItem(false, "OFF", '3', { "ESP" });
+	menu->addMenuItem(false, "OFF", '4', { "Aimbot" });
 }
 
 void handleProcessOpen(DWORD processID) {

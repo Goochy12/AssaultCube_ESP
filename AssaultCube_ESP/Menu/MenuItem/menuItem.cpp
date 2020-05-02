@@ -1,49 +1,40 @@
 #include "menuItem.h"
 
-MenuItem::MenuItem(std::string itemName, std::string itemKeypressDispay, bool itemToggle, std::string itemStatus, char itemKeypress) {
-	this->itemName = itemName;
-	this->keypressDisplay = itemKeypressDispay;
-	this->optionToggle = itemToggle;
-	this->itemStatus = itemStatus;
+MenuItem::MenuItem(bool toggle, std::string toggleDisplay, char itemKeypress, std::vector<std::string> otherDisplayItems) {
+	this->toggle = toggle;
+	this->toggleDisplay = toggleDisplay;
 	this->keypress = itemKeypress;
+	this->otherDisplayItems = otherDisplayItems;
 }
 
 MenuItem::~MenuItem() {
 
 }
 
-std::string MenuItem::getItemName() {
-	return itemName;
+bool MenuItem::getItemToggle() {
+	return this->toggle;
 }
-void MenuItem::setItemName(std::string newItemName) {
-	itemName = newItemName;
-}
-
-bool MenuItem::getOptionToggle() {
-	return optionToggle;
-}
-void MenuItem::setOptionToggle(bool newToggle) {
-	optionToggle = newToggle;
+void MenuItem::setItemToggle(bool newToggle) {
+	this->toggle = newToggle;
 }
 
-std::string MenuItem::getItemStatus() {
-	return itemStatus;
+std::string MenuItem::getItemToggleDisplay() {
+	return this->toggleDisplay;
 }
-void MenuItem::setItemStatus(std::string newItemStatus) {
-	itemStatus = newItemStatus;
+void MenuItem::setItemToggleDisplay(std::string newToggleDisplay) {
+	this->toggleDisplay = newToggleDisplay;
 }
-
 
 char MenuItem::getItemKeypress() {
 	return keypress;
 }
 void MenuItem::setItemKeypress(char newKeypress) {
-	keypress = newKeypress;
+	this->keypress = newKeypress;
 }
 
-std::string MenuItem::getKeypressDisplay() {
-	return keypressDisplay;
+std::vector<std::string> MenuItem::getOtherDisplayItems() {
+	return otherDisplayItems;
 }
-void MenuItem::setKeypressDisplay(std::string newKeypressDisplay) {
-	keypressDisplay = newKeypressDisplay;
+void MenuItem::setOtherDisplayItems(std::vector<std::string> newOtherDisplayItems) {
+	this->otherDisplayItems = newOtherDisplayItems;
 }
