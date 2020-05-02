@@ -14,9 +14,20 @@ uintptr_t moduleBase;
 uintptr_t dynamicPtrBaseAddr;
 HANDLE hProcess;
 
+//localPlayer
 uintptr_t playerEntityPtrOffset = 0x10f4f4;
+
+//health
 DWORD healthOffset = 0xF8;	//health offset
+boolean healthToggle = FALSE;
+std::string healthStatus = "OFF";
+
+//ammo
 std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };   //ammo offsets
+boolean ammoToggle = FALSE;
+std::string ammoStatus = "OFF";
+
+
 
 int main()
 {
@@ -41,17 +52,24 @@ int main()
 
     handleProcessOpen(processID);
 
-    std::vector <int> menuItems;
-    Menu menuObj(menuItems);
+    std::vector <int> menuItems = addMenuItems();
     
-    addMenuItems(menuObj);
+    Menu menuObj(menuItems);
+
+    std::cout << "1: Unlimited Ammo ->" << ammoStatus << "<-" << std::endl;
+    std::cout << "1: Godmode        ->" << healthStatus << "<-" << std::endl;
+    
 
     //getchar(); // press enter for input before code ends
     return 0;
 }
 
-void addMenuItems(Menu menu) {
+std::vector<int> addMenuItems() {
+    std::vector<int> menuItems;
 
+    menuItems.push_back(0);
+
+    return menuItems;
 }
 
 void createMenuItems() {

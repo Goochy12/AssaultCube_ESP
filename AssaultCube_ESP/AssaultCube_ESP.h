@@ -11,6 +11,6 @@ void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_
 void handleProcessOpen(DWORD processID);
 
 void createMenuItems();
-void addMenuItems(Menu menu);
+std::vector<int> addMenuItems();
 
 //DWORD getProcessIDByName(const wchar_t* processName);
