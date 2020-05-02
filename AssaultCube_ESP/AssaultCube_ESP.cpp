@@ -102,7 +102,8 @@ void menuInputLoop() {
 				ammoStatus = "OFF";
 			}
 			//update menu
-
+			menu->updateMenuItemToggle(0, ammoToggle);
+			menu->updateMenuItemToggleDisplay(0, ammoStatus);
 			menu->display();
 
 			break;
