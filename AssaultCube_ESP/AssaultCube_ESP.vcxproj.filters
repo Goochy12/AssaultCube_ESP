@@ -16,8 +16,11 @@
     <Filter Include="process">
       <UniqueIdentifier>{4943bdc5-03dd-4917-b262-6049f859acea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="menu">
-      <UniqueIdentifier>{5d94cff5-f952-4671-b15e-44a08fee6c84}</UniqueIdentifier>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{ac23c954-d29c-4045-93a5-700131aeea85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\MenuItem">
+      <UniqueIdentifier>{b174c9af-ffa8-404e-bf2f-2fb25714aa27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,8 +30,11 @@
     <ClCompile Include="process.cpp">
       <Filter>process</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>menu</Filter>
+    <ClCompile Include="Menu\menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu\MenuItem\menuItem.cpp">
+      <Filter>Menu\MenuItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +44,11 @@
     <ClInclude Include="process.h">
       <Filter>process</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>menu</Filter>
+    <ClInclude Include="Menu\menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu\MenuItem\menuItem.h">
+      <Filter>Menu\MenuItem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

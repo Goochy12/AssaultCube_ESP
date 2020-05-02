@@ -15,7 +15,7 @@ uintptr_t dynamicPtrBaseAddr;
 HANDLE hProcess;
 
 //menu
-Menu menu;
+Menu* menu;
 
 //localPlayer
 uintptr_t playerEntityPtrOffset = 0x10f4f4;
@@ -35,40 +35,32 @@ std::string ammoStatus = "OFF";
 int main()
 {
 
-    processID = NULL;   //initiate to null
+	processID = NULL;   //initiate to null
 
-    //welcome message
-    std::cout << "Waiting for Assult Cube to be opened..." << std::endl;
+	//welcome message
+	std::cout << "Waiting for Assult Cube to be opened..." << std::endl;
 
-    while (processID == NULL)
-    {
-        //get process id
-        processID = GetProcessID(L"ac_client.exe");   //L - converts to unicode
-    }
+	while (processID == NULL)
+	{
+		//get process id
+		processID = GetProcessID(L"ac_client.exe");   //L - converts to unicode
+	}
 
-    system("cls");  //clear the screen
-    Sleep(500); // give the process time to open
+	system("cls");  //clear the screen
+	Sleep(500); // give the process time to open
 
-    //load the menu
-    std::cout << "Welcome to Liam's Assult Cube Trainer/ESP" << std::endl;
+	//load the menu
+	std::cout << "Welcome to Liam's Assult Cube Trainer/ESP" << std::endl;
 
 
-    handleProcessOpen(processID);
+	handleProcessOpen(processID);
 
-    //start the menu
+	//start the menu
+	startMenu();
+	menu->display();
 
-    
-
-    //getchar(); // press enter for input before code ends
-    return 0;
-}
-
-std::vector<int> addMenuItems() {
-    std::vector<int> menuItems;
-
-    menuItems.push_back(0);
-
-    return menuItems;
+	//getchar(); // press enter for input before code ends
+	return 0;
 }
 
 void createMenuItems() {
@@ -76,50 +68,51 @@ void createMenuItems() {
 }
 
 void startMenu() {
-
+	menu = new Menu("AssaultCube Sample External Hack", "Welcome to my sample external hack!", "");
+	menu->addMenuItem("Test", "1", false, "OFF", '1');
 }
 
 void handleProcessOpen(DWORD processID) {
-    /*
-        OPEN PROCESS
+	/*
+		OPEN PROCESS
 
-        Get the module base address
-        Use the module base address to get the dynamic pointer address
-        Open the process
-    */
+		Get the module base address
+		Use the module base address to get the dynamic pointer address
+		Open the process
+	*/
 
-    //get module base address
-    moduleBase = GetModuleBaseAddress(processID, L"ac_client.exe");
+	//get module base address
+	moduleBase = GetModuleBaseAddress(processID, L"ac_client.exe");
 
-    //resolve the base address
-    dynamicPtrBaseAddr = moduleBase + playerEntityPtrOffset;
-    //std::cout << "DyanmicPtrBaseAddr: " << "0x" << std::hex << dynamicPtrBaseAddr << std::endl;
+	//resolve the base address
+	dynamicPtrBaseAddr = moduleBase + playerEntityPtrOffset;
+	//std::cout << "DyanmicPtrBaseAddr: " << "0x" << std::hex << dynamicPtrBaseAddr << std::endl;
 
-    //get handler to process
-    hProcess = 0;
-    hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, processID);
+	//get handler to process
+	hProcess = 0;
+	hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, processID);
 }
 
 void setValue(int value, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr, uintptr_t address) {
-    //read ammo value
-    int initialGameValue = 0;
-    ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
-    std::cout << "Current Value: " << std::dec << initialGameValue << std::endl;
+	//read ammo value
+	int initialGameValue = 0;
+	ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+	std::cout << "Current Value: " << std::dec << initialGameValue << std::endl;
 
-    WriteProcessMemory(hProcess, (BYTE*)address, &value, sizeof(value), nullptr);
+	WriteProcessMemory(hProcess, (BYTE*)address, &value, sizeof(value), nullptr);
 
-    //read again
-    ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
-    std::cout << "New Value: " << std::dec << initialGameValue << std::endl;
+	//read again
+	ReadProcessMemory(hProcess, (BYTE*)address, &initialGameValue, sizeof(initialGameValue), nullptr);
+	std::cout << "New Value: " << std::dec << initialGameValue << std::endl;
 }
 
 uintptr_t getAmmoAddress(std::vector<unsigned int> ammoOffsets, HANDLE hProcess, uintptr_t dynamicPtrBaseAddr) {
-    uintptr_t ammoAddress;
+	uintptr_t ammoAddress;
 
-    //resolve ammo pointer
-    ammoAddress = FindDMAAddy(hProcess, dynamicPtrBaseAddr, ammoOffsets);
+	//resolve ammo pointer
+	ammoAddress = FindDMAAddy(hProcess, dynamicPtrBaseAddr, ammoOffsets);
 
-    return ammoAddress;
+	return ammoAddress;
 }
 
 //std::cout << "Waiting to open Assult Cube...\n"; // Welcome message
