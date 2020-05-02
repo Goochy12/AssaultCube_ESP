@@ -59,6 +59,10 @@ int main()
 	startMenu();
 	menu->display();
 
+	//TODO:
+	//loop display - update on change
+	//update menu on item toggle
+
 	//getchar(); // press enter for input before code ends
 	return 0;
 }
