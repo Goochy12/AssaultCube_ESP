@@ -6,13 +6,16 @@
 #include "process.h"
 #include <vector>
 #include <Windows.h>
-#include "menu.h"
+#include "Menu/menu.h"
 
 
 DWORD processID;
 uintptr_t moduleBase;
 uintptr_t dynamicPtrBaseAddr;
 HANDLE hProcess;
+
+//menu
+Menu menu;
 
 //localPlayer
 uintptr_t playerEntityPtrOffset = 0x10f4f4;
@@ -52,12 +55,8 @@ int main()
 
     handleProcessOpen(processID);
 
-    std::vector <int> menuItems = addMenuItems();
-    
-    Menu menuObj(menuItems);
+    //start the menu
 
-    std::cout << "1: Unlimited Ammo ->" << ammoStatus << "<-" << std::endl;
-    std::cout << "1: Godmode        ->" << healthStatus << "<-" << std::endl;
     
 
     //getchar(); // press enter for input before code ends
@@ -73,6 +72,10 @@ std::vector<int> addMenuItems() {
 }
 
 void createMenuItems() {
+
+}
+
+void startMenu() {
 
 }
 

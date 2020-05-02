@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include "menu.h"
+#include "Menu/menu.h"
 
 HWND hwndAC_Client;	//window handler for client
 HANDLE hProcessAC_Client;	//process handler
@@ -12,5 +12,7 @@ void handleProcessOpen(DWORD processID);
 
 void createMenuItems();
 std::vector<int> addMenuItems();
+
+void startMenu();
 
 //DWORD getProcessIDByName(const wchar_t* processName);
