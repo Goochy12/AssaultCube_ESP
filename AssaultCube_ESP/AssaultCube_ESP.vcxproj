@@ -149,12 +149,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssaultCube_ESP.cpp" />
+    <ClCompile Include="mem.cpp" />
     <ClCompile Include="Menu\menu.cpp" />
     <ClCompile Include="Menu\MenuItem\menuItem.cpp" />
     <ClCompile Include="process.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssaultCube_ESP.h" />
+    <ClInclude Include="mem.h" />
     <ClInclude Include="Menu\menu.h" />
     <ClInclude Include="Menu\MenuItem\menuItem.h" />
     <ClInclude Include="process.h" />

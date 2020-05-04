@@ -22,6 +22,9 @@
     <Filter Include="Menu\MenuItem">
       <UniqueIdentifier>{b174c9af-ffa8-404e-bf2f-2fb25714aa27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mem">
+      <UniqueIdentifier>{1f997e6d-1383-49ae-afed-afb9ef2f368f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssaultCube_ESP.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="Menu\MenuItem\menuItem.cpp">
       <Filter>Menu\MenuItem</Filter>
     </ClCompile>
+    <ClCompile Include="mem.cpp">
+      <Filter>mem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssaultCube_ESP.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Menu\MenuItem\menuItem.h">
       <Filter>Menu\MenuItem</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>mem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

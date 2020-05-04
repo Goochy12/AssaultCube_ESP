@@ -7,6 +7,7 @@
 #include <vector>
 #include <Windows.h>
 #include "Menu/menu.h"
+#include "mem.h"
 
 
 DWORD processID;
