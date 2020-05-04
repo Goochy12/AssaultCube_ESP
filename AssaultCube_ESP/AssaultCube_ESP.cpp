@@ -7,7 +7,6 @@
 #include <vector>
 #include <Windows.h>
 #include "Menu/menu.h"
-#include <future>
 
 
 DWORD processID;
@@ -80,17 +79,12 @@ void findAddresses() {
 
 void menuInputLoop() {
 
-	char keyPress;
-	std::cin >> keyPress;
 
-	//std::async(std::launch::async, continuousWriteToMemory);
-	auto f = std::async(std::launch::async, continuousWriteToMemory);
+	while (!GetAsyncKeyState(VK_END)) {
 
-	while (keyPress != '0') {
+		continuousWriteToMemory();
 
-		switch (keyPress)
-		{
-		case '1':
+		if(GetAsyncKeyState(VK_NUMPAD1) && 1){
 
 			//setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
 
@@ -105,24 +99,15 @@ void menuInputLoop() {
 			menu->updateMenuItemToggle(0, ammoToggle);
 			menu->updateMenuItemToggleDisplay(0, ammoStatus);
 			menu->display();
-
-			break;
-		default:
-			break;
 		}
 
-		std::cin >> keyPress;
 	}
 }
 
 void continuousWriteToMemory() {
-	while (true)
-	{
-	//std::cout << "yes" << std::endl;
-		if (ammoToggle) {
-			setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
-		}
 
+	if (ammoToggle) {
+		setValue(9999, hProcess, dynamicPtrBaseAddr, ammoAddress);
 	}
 }
 
